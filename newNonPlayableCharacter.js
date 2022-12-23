@@ -23,49 +23,34 @@ function newNonPlayableCharacter(x, y) {
 
     setInterval(moveCharacter, 1)
 
-    function walkEast(time) {
-        return new Promise ((resolve) => {
-            direction = 'east'
-            element.src = `./assets/red-character/east.gif`
-            setTimeout(() => {
-                    stop()
-                    resolve()
-                }, time)
-        })
+    async function walkEast(time) {
+        direction = 'east'
+        element.src = `./assets/red-character/east.gif`
+        await sleep(time)
+        stop()
     }
 
-    function walkNorth(time) {
-        return new Promise ((resolve) => {
-            direction = 'north'
-            element.src = `./assets/red-character/north.gif`
-                setTimeout(() => {
-                    stop()
-                    resolve()
-                }, time)
-        })
+    async function walkNorth(time) {
+        direction = 'north'
+        element.src = `./assets/red-character/north.gif`
+        await sleep(time)
+        stop()
     }
 
-    function walkWest(time) {
-        return new Promise ((resolve) => {
-            direction = 'west'
-            element.src = `./assets/red-character/west.gif`
-                setTimeout(() => {
-                    stop()
-                    resolve()
-                }, time)
-        })
+    async function walkWest(time) {
+        direction = 'west'
+        element.src = `./assets/red-character/west.gif`
+        await sleep(time)
+        stop()
     }
 
-    function walkSouth(time) {
-        return new Promise ((resolve) => {
+    async function walkSouth(time) {
         direction = 'south'
         element.src = `./assets/red-character/south.gif`
-        setTimeout(() => {
-            stop()
-            resolve()
-        }, time)
-    })
+        await sleep(time)
+        stop()
     }
+    
 
     function stop() {
         direction = null
@@ -80,4 +65,20 @@ function newNonPlayableCharacter(x, y) {
         walkSouth: walkSouth,
         stop: stop
     }
+}
+
+function sleep(time) {
+    return new Promise(resolve => {
+        setTimeout(resolve, time)
+    })
+}
+
+async function moveNPC(){
+    await npc.walkNorth(1400)
+    await npc.walkEast(1200)
+    await npc.walkSouth(300)
+    await npc.walkEast(1500)
+    await npc.walkSouth(1500)
+    await npc.walkWest(2700)
+    await npc.walkNorth(400)
 }
